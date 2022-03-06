@@ -1,0 +1,8 @@
+.overview {
+  margin: 0 auto;
+  max-width: 60em;
+}
+
+.information div {
+  min-width: 12em;
+}
