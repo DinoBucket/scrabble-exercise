@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultsService, ResultsTable } from '../results.service';
 
 @Component({
   selector: 'app-results-table',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results-table.component.css']
 })
 export class ResultsTableComponent implements OnInit {
+  results: ResultsTable = [];
 
-  constructor() { }
+  constructor(
+    private resultsService: ResultsService
+  ) { }
 
   ngOnInit(): void {
+    this.resultsService.getResults().subscribe(
+      results => this.results = results
+    );
   }
 
 }
