@@ -10,18 +10,20 @@ import { ResultsService, ResultsTable } from '../results.service';
   styleUrls: ['./results-table.component.css']
 })
 export class ResultsTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'played', 'score'];
+  displayedColumns: string[] = [];
   dataSource: MatTableDataSource<ResultsTable>;
   @ViewChild(MatSort) sort = new MatSort();
 
   constructor(
-    private resultsService: ResultsService
+    public resultsService: ResultsService
   ) {
+    this.setColumns();
     this.dataSource = new MatTableDataSource<ResultsTable>();
     this.dataSource.filterPredicate = (data: ResultsTable, filter: string) => !filter || data.name.toLowerCase().includes(filter);
   }
 
   ngOnInit(): void {
+    this.setColumns(window.innerWidth);
     this.resultsService.getResults().subscribe(
       results => {
         this.dataSource.data = results;
@@ -29,21 +31,24 @@ export class ResultsTableComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
   @HostListener('window:resize', ['$event'])
-  setTableColumns(event: any) {
-    if (window.innerWidth > 500) {
-      this.displayedColumns = ['position', 'name', 'played', 'score'];
-    }
-    else {
-      this.displayedColumns = ['position', 'name', 'score'];
-    }
+  setTableColumns(): void {
+    this.setColumns(window.innerWidth);
   }
 
-  nameFilter(event: any) {
+  setColumns(width?: number): void {
+    const columns = ['position', 'name', 'score'];
+    if (!width || width > 500) {
+      columns.splice(2, 0, 'played');
+    }
+    this.displayedColumns = columns;
+  }
+
+  nameFilter(event: any): void {
     const testValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = testValue.toLowerCase();
   }
