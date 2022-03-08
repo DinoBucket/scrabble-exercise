@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-column-position {
+  flex: 1 1 6em;
+}
+
+.mat-column-name {
+  flex: 2 1 10em;
+}
+
+.mat-column-played {
+  flex: 1 1 9em;
+}
+
+.mat-column-score {
+  justify-content: right;
+  text-align: right;
+  flex: 1 1 7em;
+}

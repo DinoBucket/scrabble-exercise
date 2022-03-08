@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { OverviewComponent } from './overview/overview.component';
@@ -20,6 +25,10 @@ import { ResultsTableComponent } from './results-table/results-table.component';
   imports: [
     CommonModule,
     FlexLayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
     SharedModule
   ],
   exports: [
